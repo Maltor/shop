@@ -1,0 +1,4 @@
+Django==1.5.5
+distribute==0.7.3
+psycopg2==2.5.1
+
