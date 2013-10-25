@@ -2,6 +2,7 @@
 
 # Django settings for shop project.
 from  local_settings import *
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -77,6 +78,10 @@ ROOT_URLCONF = 'shop.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'shop.wsgi.application'
 
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,6 +90,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
+    'suit',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -92,6 +98,7 @@ INSTALLED_APPS = (
     'zakaz',
     'content',
     'tinymce',
+    'south',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -192,3 +199,33 @@ TINYMCE_DEFAULT_CONFIG={
 }
 #FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + 'filebrowser'
 FILEBROWSER_DIRECTORY = 'filebrowser'
+
+# Django Suit configuration example
+SUIT_CONFIG = {
+    # header
+    'ADMIN_NAME': 'Django Suit',
+    'HEADER_DATE_FORMAT': 'l, j.m.Y',
+    'HEADER_TIME_FORMAT': 'H:i',
+
+    # forms
+    'SHOW_REQUIRED_ASTERISK': True,  # Default True
+    'CONFIRM_UNSAVED_CHANGES': True, # Default True
+
+    # menu
+    'SEARCH_URL': '/admin/auth/user/',
+    'MENU_ICONS': {
+        'sites': 'icon-leaf',
+        'auth': 'icon-lock',
+     },
+    'MENU_OPEN_FIRST_CHILD': True, # Default True
+    'MENU_EXCLUDE': ('auth.group',),
+    'MENU': (
+         'sites',
+         {'app': 'auth', 'icon':'icon-lock', 'models': ('user', 'group')},
+         {'label': 'Settings', 'icon':'icon-cog', 'models': ('auth.user', 'auth.group')},
+         {'label': 'Support', 'icon':'icon-question-sign', 'url': '/support/'},
+     ),
+
+    # misc
+    'LIST_PER_PAGE': 15
+}

@@ -5,3 +5,5 @@ django-mptt==0.6.0
 pillow==2.2.1
 django-tinymce==1.5.1
 django-staticfiles==1.2.1
+south==0.8.2
+django-suit==0.2.5
